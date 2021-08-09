@@ -1,0 +1,2 @@
+#define GameLife_VERSION_MAJOR @GameLife_VERSION_MAJOR@
+#define GameLife_VERSION_MINOR @GameLife_VERSION_MINOR@
