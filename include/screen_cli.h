@@ -20,10 +20,10 @@ public:
         int get_weight();
 
 private:
-        static constexpr const int height = 25;
-        static constexpr const int weight = 25;
+        static constexpr const int height = 35;
+        static constexpr const int weight = 80;
         static constexpr const char life = 'X';
-        static constexpr const char dead = ' ';
+        static constexpr const char dead = '.';
         static constexpr const char vboard = '|';
         static constexpr const char hboard = '-';
 

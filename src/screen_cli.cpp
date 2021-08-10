@@ -59,7 +59,6 @@ bool screen_cli::get_pixel(int x, int y)
                         return true;
                 }
         }
-
         return false;
 }
 
@@ -99,11 +98,11 @@ void screen_cli::random_map_set()
         srand(time(NULL));
         for (auto &i : screen) {
                 for (auto &j : i) {
-                        if (rand() % 100 > 10) {
+                        if (rand() % 100 > 20) {
                                 j = dead;
                         } else {
                                 j = life;
-                        }
+                        } 
                 }
         }
 }
