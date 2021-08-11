@@ -16,45 +16,63 @@ game::~game()
 
 void game::start()
 {
-        int life_count = 0;
         while (1) {
-                sleep(1);
-                for (int i = 0; i < screen->get_height(); ++i) {
-                        for (int j = 0; j < screen->get_weight(); ++j) {
-                                life_count = 0;
-                                if (screen->get_pixel(i - 1, j - 1)) {
-                                        ++life_count;
-                                }
-                                if (screen->get_pixel(i - 1, j)) {
-                                        ++life_count;
-                                }
-                                if (screen->get_pixel(i - 1, j + 1)) {
-                                        ++life_count;
-                                }
-                                if (screen->get_pixel(i, j - 1)) {
-                                        ++life_count;
-                                }
-                                if (screen->get_pixel(i, j + 1)) {
-                                        ++life_count;
-                                }
-                                if (screen->get_pixel(i + 1, j - 1)) {
-                                        ++life_count;
-                                }
-                                if (screen->get_pixel(i + 1, j)) {
-                                        ++life_count;
-                                }
-                                if (screen->get_pixel(i + 1, j + 1)) {
-                                        ++life_count;
-                                }
+                usleep(60000);
+                scan_map();
+                process_actions();
+                screen->show();
+        }
+}
 
-                                if (!screen->get_pixel(j, i) && life_count == 3) {
-                                        screen->set_pixel(j, i);
-                                } else if (screen->get_pixel(j, i) && life_count != 3 && life_count != 2) {
-                                        screen->unset_pixel(j, i);
-                                }
+void game::scan_map()
+{
+        int life_count = 0;
+        for (int i = 0; i < screen->get_height(); ++i) {
+                for (int j = 0; j < screen->get_weight(); ++j) {
+                        life_count = 0;
+                        if (screen->get_pixel(j - 1, i - 1)) {
+                                ++life_count;
                         }
-                        screen->show();
+                        if (screen->get_pixel(j - 1, i)) {
+                                ++life_count;
+                        }
+                        if (screen->get_pixel(j - 1, i + 1)) {
+                                ++life_count;
+                        }
+                        if (screen->get_pixel(j, i - 1)) {
+                                ++life_count;
+                        }
+                        if (screen->get_pixel(j, i + 1)) {
+                                ++life_count;
+                        }
+                        if (screen->get_pixel(j + 1, i - 1)) {
+                                ++life_count;
+                        }
+                        if (screen->get_pixel(j + 1, i)) {
+                                ++life_count;
+                        }
+                        if (screen->get_pixel(j + 1, i + 1)) {
+                                ++life_count;
+                        }
+
+                        if (!screen->get_pixel(j, i) && life_count == 3) {
+                                actions_stack.push({actions::life, j, i});
+                        } else if (screen->get_pixel(j, i) && (life_count > 3 || life_count < 2)) {
+                                actions_stack.push({actions::dead, j, i});
+                        }
                 }
+        }
+}
+
+void game::process_actions()
+{
+        while (!actions_stack.empty()) {
+                if (actions_stack.top().action == actions::life) {
+                        screen->set_pixel(actions_stack.top().x, actions_stack.top().y);
+                } else {
+                        screen->unset_pixel(actions_stack.top().x, actions_stack.top().y);
+                }
+                actions_stack.pop();
         }
 }
 

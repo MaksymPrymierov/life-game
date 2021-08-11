@@ -2,6 +2,8 @@
 
 #include <screen_cli.h>
 
+#include <stack>
+
 namespace game_life
 {
 
@@ -14,7 +16,24 @@ public:
         void start();
 
 private:
+        enum class actions
+        {
+                life = 0,
+                dead
+        };
+
+        struct action_data
+        {
+                actions action;
+                int x;
+                int y;
+        };
+
+        std::stack<action_data> actions_stack;
         screen_cli *screen;
+
+        void scan_map();
+        void process_actions();
 };
 
 } // game_life
