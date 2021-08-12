@@ -9,7 +9,7 @@ screen_cli::screen_cli()
 {
         screen.resize(height);
         for (auto &i : screen) {
-                i.resize(static_cast<std::size_t>(weight));
+                i.resize(static_cast<std::size_t>(width));
         }
         random_map_set();
 }
@@ -40,21 +40,21 @@ void screen_cli::show()
 
 void screen_cli::unset_pixel(int x, int y)
 {
-        if (x < weight && x >= 0 && y < height && y >= 0) {
+        if (x < width && x >= 0 && y < height && y >= 0) {
                 screen[y][x] = dead;
         }
 }
 
 void screen_cli::set_pixel(int x, int y)
 {
-        if (x < weight && x >= 0 && y < height && y >= 0) {
+        if (x < width && x >= 0 && y < height && y >= 0) {
                 screen[y][x] = life;
         }
 }
 
 bool screen_cli::get_pixel(int x, int y)
 {
-        if (x < weight && x >= 0 && y < height && y >= 0) {
+        if (x < width && x >= 0 && y < height && y >= 0) {
                 if (screen[y][x] == life) {
                         return true;
                 }
@@ -63,9 +63,9 @@ bool screen_cli::get_pixel(int x, int y)
         return false;
 }
 
-int screen_cli::get_weight()
+int screen_cli::get_width()
 {
-        return weight;
+        return width;
 }
 
 int screen_cli::get_height()
@@ -87,7 +87,7 @@ void screen_cli::print_vboards()
 void screen_cli::print_hboards()
 {
         print_vboards();
-        for (unsigned i = 0; i < weight; ++i) {
+        for (unsigned i = 0; i < width; ++i) {
                 std::cout << hboard;
         }
         print_vboards();

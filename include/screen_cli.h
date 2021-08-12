@@ -17,11 +17,11 @@ public:
         
         bool get_pixel(int x, int y);
         int get_height();
-        int get_weight();
+        int get_width();
 
 private:
         static constexpr const int height = 25;
-        static constexpr const int weight = 25;
+        static constexpr const int width = 25;
         static constexpr const char life = 'X';
         static constexpr const char dead = ' ';
         static constexpr const char vboard = '|';

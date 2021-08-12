@@ -28,7 +28,7 @@ void game::scan_map()
 {
         int life_count = 0;
         for (int i = 0; i < screen->get_height(); ++i) {
-                for (int j = 0; j < screen->get_weight(); ++j) {
+                for (int j = 0; j < screen->get_width(); ++j) {
                         life_count = 0;
                         if (screen->get_pixel(j - 1, i - 1)) {
                                 ++life_count;
