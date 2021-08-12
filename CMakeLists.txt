@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(GameLife VERSION 0.2)
 
+find_package(Curses REQUIRED)
+
 include_directories(./include .)
 
 configure_file(include/config.h.in config.h)
@@ -15,4 +17,7 @@ add_executable(GameLife
         src/screen_cli.cpp
         src/game.cpp
         src/screen.cpp
+        src/screen_ncurses.cpp
         )
+
+target_link_libraries(GameLife ${CURSES_LIBRARIES})
