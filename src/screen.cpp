@@ -1,7 +1,5 @@
 #include <screen.h>
 
-#include <stdexcept>
-
 namespace game_life
 {
 
@@ -32,29 +30,25 @@ void screen::show()
 
 void screen::set_pixel(int x, int y)
 {  
-        try {
-                screen_map.at(y).at(x) = true;
-        } catch (const std::out_of_range &d) {
-                return;
+        if (y < height && y >= 0 && x < width && x >= 0) {
+                screen_map[y][x] = true;
         }
 }
 
 void screen::unset_pixel(int x, int y)
 {  
-        try {
-                screen_map.at(y).at(x) = false;
-        } catch (const std::out_of_range &d) {
-                return;
+        if (y < height && y >= 0 && x < width && x >= 0) {
+                screen_map[y][x] = false;
         }
 }
 
 bool screen::get_pixel(int x, int y)
 {  
-        try {
-                return screen_map.at(y).at(x);
-        } catch (const std::out_of_range &d) {
-                return false;
+        if (y < height && y >= 0 && x < width && x >= 0) {
+                return screen_map[y][x];
         }
+
+        return false;
 }
 
 int screen::get_height()
@@ -69,13 +63,13 @@ int screen::get_width()
 
 void screen::random_map_set()
 {
-        srand(time(NULL));
+        srand(time_t(NULL));
         for (int i = 0; i < height; ++i) {
                 for (int j = 0; j < width; ++j) {
                         if (rand() % 100 > life_probability) {
-                                screen_map.at(i).at(j) = false;
+                                screen_map[i][j] = false;
                         } else {
-                                screen_map.at(i).at(j) = true;
+                                screen_map[i][j] = true;
                         }
                 }
         }
