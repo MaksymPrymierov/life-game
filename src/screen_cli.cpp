@@ -42,24 +42,30 @@ void screen_cli::show()
 
 void screen_cli::unset_pixel(int x, int y)
 {
-        if (x < width && x >= 0 && y < height && y >= 0) {
-                screen[y][x] = dead;
+        try {
+                screen.at(y).at(x) = dead;
+        } catch (const std::out_of_range &d) {
+                return;
         }
 }
 
 void screen_cli::set_pixel(int x, int y)
 {
-        if (x < width && x >= 0 && y < height && y >= 0) {
-                screen[y][x] = life;
+        try {
+                screen.at(y).at(x) = life;
+        } catch (const std::out_of_range &d) {
+                return;
         }
 }
 
 bool screen_cli::get_pixel(int x, int y)
 {
-        if (x < width && x >= 0 && y < height && y >= 0) {
-                if (screen[y][x] == life) {
+        try {
+                if (screen.at(y).at(x) == life) {
                         return true;
                 }
+        } catch (const std::out_of_range &d) {
+                return false;
         }
 
         return false;
