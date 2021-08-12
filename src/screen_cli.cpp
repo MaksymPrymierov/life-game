@@ -95,7 +95,7 @@ void screen_cli::print_vboards()
 void screen_cli::print_hboards()
 {
         print_vboards();
-        for (unsigned i = 0; i < width; ++i) {
+        for (int i = 0; i < width; ++i) {
                 std::cout << hboard;
         }
         print_vboards();
