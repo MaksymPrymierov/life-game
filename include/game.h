@@ -29,6 +29,7 @@ private:
                 int y;
         };
 
+        static constexpr const unsigned int game_cycle_delay = 100; // milliseconds
         std::stack<action_data> actions_stack;
         screen_cli *screen;
 

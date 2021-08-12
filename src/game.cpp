@@ -18,7 +18,7 @@ game::~game()
 void game::start()
 {
         while (1) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                std::this_thread::sleep_for(std::chrono::milliseconds(game_cycle_delay));
                 scan_map();
                 process_actions();
                 screen->show();
