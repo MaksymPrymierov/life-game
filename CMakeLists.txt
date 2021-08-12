@@ -14,4 +14,5 @@ add_executable(GameLife
         src/main.cpp
         src/screen_cli.cpp
         src/game.cpp
+        src/screen.cpp
         )
