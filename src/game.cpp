@@ -2,7 +2,8 @@
 
 #include <unistd.h>
 
-#include <iostream>
+#include <chrono>
+#include <thread>
 
 namespace game_life
 {
@@ -17,7 +18,7 @@ game::~game()
 void game::start()
 {
         while (1) {
-                usleep(60000);
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
                 scan_map();
                 process_actions();
                 screen->show();
