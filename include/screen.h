@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <random>
 
 namespace game_life
 {
@@ -23,6 +24,8 @@ protected:
         int height;
         int width;
         int life_probability;
+        std::random_device rd;
+        std::uniform_int_distribution<int> rd_values{0, 100};
         std::vector<std::vector<bool>> screen_map;
 
         void random_map_set();

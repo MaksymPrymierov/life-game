@@ -63,10 +63,9 @@ int screen::get_width()
 
 void screen::random_map_set()
 {
-        srand(time_t(NULL));
         for (int i = 0; i < height; ++i) {
                 for (int j = 0; j < width; ++j) {
-                        if (rand() % 100 > life_probability) {
+                        if (rd_values(rd) > life_probability) {
                                 screen_map[i][j] = false;
                         } else {
                                 screen_map[i][j] = true;
