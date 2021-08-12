@@ -8,7 +8,7 @@ namespace game_life
 class screen_cli
 {
 public:
-        screen_cli();
+        screen_cli(int x, int y);
         ~screen_cli();
 
         void show();
@@ -20,13 +20,13 @@ public:
         int get_width();
 
 private:
-        static constexpr const int height = 25;
-        static constexpr const int width = 25;
         static constexpr const char life = 'X';
         static constexpr const char dead = ' ';
         static constexpr const char vboard = '|';
         static constexpr const char hboard = '-';
 
+        int height;
+        int width;
         std::vector<std::vector<char>> screen;
 
         void clear();

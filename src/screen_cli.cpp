@@ -5,7 +5,9 @@
 namespace game_life
 {
 
-screen_cli::screen_cli()
+screen_cli::screen_cli(int w, int h) :
+        height(h),
+        width(w)
 {
         screen.resize(height);
         for (auto &i : screen) {
