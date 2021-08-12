@@ -6,7 +6,9 @@
 
 int main()
 {
-        int w, h;
+        int w;
+        int h;
+        int l = -1;
 
         std::cout << "Game Life Version: " <<
                 GameLife_VERSION_MAJOR << "." <<
@@ -18,7 +20,12 @@ int main()
         std::cout << "Enter the width of the map: ";
         std::cin >> w;
 
-        game_life::screen_cli screen(w, h);
+        while (l < 0 || l > 100) {
+                std::cout << "Enter the life probability [0-100]: ";
+                std::cin >> l;
+        }
+
+        game_life::screen_cli screen(w, h, l);
         game_life::game game(&screen);
 
         screen.show();

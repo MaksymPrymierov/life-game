@@ -5,9 +5,10 @@
 namespace game_life
 {
 
-screen_cli::screen_cli(int w, int h) :
+screen_cli::screen_cli(int w, int h, int life_prob) :
         height(h),
-        width(w)
+        width(w),
+        life_probability(life_prob)
 {
         screen.resize(height);
         for (auto &i : screen) {
@@ -107,7 +108,7 @@ void screen_cli::random_map_set()
         srand(time(NULL));
         for (auto &i : screen) {
                 for (auto &j : i) {
-                        if (rand() % 100 > 10) {
+                        if (rand() % 100 > life_probability) {
                                 j = dead;
                         } else {
                                 j = life;

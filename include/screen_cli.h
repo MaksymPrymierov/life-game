@@ -8,7 +8,7 @@ namespace game_life
 class screen_cli
 {
 public:
-        screen_cli(int x, int y);
+        screen_cli(int x, int y, int life_prob);
         ~screen_cli();
 
         void show();
@@ -27,6 +27,7 @@ private:
 
         int height;
         int width;
+        int life_probability;
         std::vector<std::vector<char>> screen;
 
         void clear();
