@@ -1,6 +1,6 @@
 #pragma once
 
-#include <screen_cli.h>
+#include <screen.h>
 
 #include <stack>
 
@@ -10,7 +10,7 @@ namespace game_life
 class game
 {
 public:
-        game(screen_cli *s);
+        game(screen *s);
         ~game();
 
         void start();
@@ -31,7 +31,7 @@ private:
 
         static constexpr inline unsigned int game_cycle_delay = 100; // milliseconds
         std::stack<action_data> actions_stack;
-        screen_cli *screen;
+        screen *screen_;
 
         void scan_map();
         void process_actions();
