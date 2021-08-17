@@ -15,14 +15,6 @@ screen::screen(int w, int h, int life_prob) :
         random_map_set();
 }
 
-screen::~screen()
-{  
-        for (auto &i : m_screen_map) {
-                i.clear();
-        }
-        m_screen_map.clear();
-}
-
 void screen::set_pixel(int x, int y)
 {  
         if (y < m_height && y >= 0 && x < m_width && x >= 0) {

@@ -10,7 +10,7 @@ class screen
 {
 public:
         screen(int w, int h, int life_prob);
-        virtual ~screen();
+        virtual ~screen() = default;
 
         virtual void show() = 0;
         void set_pixel(int x, int y);
