@@ -29,9 +29,9 @@ private:
                 int y;
         };
 
-        static constexpr inline unsigned int game_cycle_delay = 100; // milliseconds
-        std::stack<action_data> actions_stack;
-        screen *screen_;
+        static constexpr inline unsigned int m_game_cycle_delay = 100; // milliseconds
+        std::stack<action_data> m_actions_stack;
+        screen *m_screen;
 
         void scan_map();
         void process_actions();

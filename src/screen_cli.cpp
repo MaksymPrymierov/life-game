@@ -17,14 +17,14 @@ void screen_cli::show()
         clear();
         print_hboards();
 
-        for (int i = 0; i < this->height; ++i)
+        for (int i = 0; i < m_height; ++i)
         {
                 print_vboards();
-                for (int j = 0; j < this->width; ++j) {
-                        if (this->screen_map.at(i).at(j)) {
-                                std::cout << life;
+                for (int j = 0; j < m_width; ++j) {
+                        if (m_screen_map.at(i).at(j)) {
+                                std::cout << m_life;
                         } else {
-                                std::cout << dead;
+                                std::cout << m_dead;
                         }
                 }
                 print_vboards();
@@ -41,17 +41,17 @@ void screen_cli::clear()
 
 void screen_cli::print_vboards()
 {
-        std::cout << vboard;
+        std::cout << m_vboard;
 }
 
 void screen_cli::print_hboards()
 {
         print_vboards();
-        for (int i = 0; i < this->width; ++i) {
-                std::cout << hboard;
+        for (int i = 0; i < m_width; ++i) {
+                std::cout << m_hboard;
         }
         print_vboards();
         std::cout << '\n';
 }
 
-} // game_life
+} // game_m_life

@@ -15,13 +15,13 @@ public:
         void show();
 
 private:
-        static constexpr inline char life = 'X';
-        static constexpr inline char dead = ' ';
-        static constexpr inline char vboard = '|';
-        static constexpr inline char hboard = '-';
-        static constexpr inline char corner = '+';
+        static constexpr inline char m_life = 'X';
+        static constexpr inline char m_dead = ' ';
+        static constexpr inline char m_vboard = '|';
+        static constexpr inline char m_hboard = '-';
+        static constexpr inline char m_corner = '+';
 
-        WINDOW *game_win;
+        WINDOW *m_game_win;
 
         void create_window();
 };

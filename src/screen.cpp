@@ -4,43 +4,43 @@ namespace game_life
 {
 
 screen::screen(int w, int h, int life_prob) :
-        height(h),
-        width(w),
-        life_probability(life_prob)
+        m_height(h),
+        m_width(w),
+        m_life_probability(life_prob)  
 {  
-        screen_map.resize(height);
-        for (auto &i : screen_map) {
-                i.resize(static_cast<std::size_t>(width));
+        m_screen_map.resize(m_height);
+        for (auto &i : m_screen_map) {
+                i.resize(static_cast<std::size_t>(m_width));
         }
         random_map_set();
 }
 
 screen::~screen()
 {  
-        for (auto &i : screen_map) {
+        for (auto &i : m_screen_map) {
                 i.clear();
         }
-        screen_map.clear();
+        m_screen_map.clear();
 }
 
 void screen::set_pixel(int x, int y)
 {  
-        if (y < height && y >= 0 && x < width && x >= 0) {
-                screen_map[y][x] = true;
+        if (y < m_height && y >= 0 && x < m_width && x >= 0) {
+                m_screen_map[y][x] = true;
         }
 }
 
 void screen::unset_pixel(int x, int y)
 {  
-        if (y < height && y >= 0 && x < width && x >= 0) {
-                screen_map[y][x] = false;
+        if (y < m_height && y >= 0 && x < m_width && x >= 0) {
+                m_screen_map[y][x] = false;
         }
 }
 
 bool screen::get_pixel(int x, int y)
 {  
-        if (y < height && y >= 0 && x < width && x >= 0) {
-                return screen_map[y][x];
+        if (y < m_height && y >= 0 && x < m_width && x >= 0) {
+                return m_screen_map[y][x];
         }
 
         return false;
@@ -48,22 +48,22 @@ bool screen::get_pixel(int x, int y)
 
 int screen::get_height()
 {
-        return height;
+        return m_height;
 }
 
 int screen::get_width()
 {
-        return width;
+        return m_width;
 }
 
 void screen::random_map_set()
 {
-        for (int i = 0; i < height; ++i) {
-                for (int j = 0; j < width; ++j) {
-                        if (rd_values(rd) > life_probability) {
-                                screen_map[i][j] = false;
+        for (int i = 0; i < m_height; ++i) {
+                for (int j = 0; j < m_width; ++j) {
+                        if (m_rd_values(m_rd) > m_life_probability) {
+                                m_screen_map[i][j] = false;
                         } else {
-                                screen_map[i][j] = true;
+                                m_screen_map[i][j] = true;
                         }
                 }
         }

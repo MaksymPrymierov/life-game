@@ -14,10 +14,10 @@ public:
         void show();
 
 private:
-        static constexpr inline char life = 'X';
-        static constexpr inline char dead = ' ';
-        static constexpr inline char vboard = '|';
-        static constexpr inline char hboard = '-';
+        static constexpr inline char m_life = 'X';
+        static constexpr inline char m_dead = ' ';
+        static constexpr inline char m_vboard = '|';
+        static constexpr inline char m_hboard = '-';
 
         void clear();
         void print_vboards();

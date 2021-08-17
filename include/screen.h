@@ -21,12 +21,12 @@ public:
         int get_width();
 
 protected:
-        int height;
-        int width;
-        int life_probability;
-        std::random_device rd;
-        std::uniform_int_distribution<int> rd_values{0, 100};
-        std::vector<std::vector<bool>> screen_map;
+        int m_height;
+        int m_width;
+        int m_life_probability;
+        std::random_device m_rd;
+        std::uniform_int_distribution<int> m_rd_values{0, 100};
+        std::vector<std::vector<bool>> m_screen_map;
 
         void random_map_set();
 };
