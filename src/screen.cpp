@@ -23,11 +23,6 @@ screen::~screen()
         screen_map.clear();
 }
 
-void screen::show()
-{  
-        /* Abstract Method */
-}
-
 void screen::set_pixel(int x, int y)
 {  
         if (y < height && y >= 0 && x < width && x >= 0) {

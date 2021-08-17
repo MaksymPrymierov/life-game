@@ -12,7 +12,7 @@ public:
         screen(int w, int h, int life_prob);
         ~screen();
 
-        virtual void show();
+        virtual void show() = 0;
         void set_pixel(int x, int y);
         void unset_pixel(int x, int y);
 
