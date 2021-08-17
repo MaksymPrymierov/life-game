@@ -19,4 +19,4 @@ add_executable(GameLife
         )
 
 target_include_directories(GameLife PUBLIC ./include ./build)
-target_link_libraries(GameLife ${CURSES_LIBRARIES})
+target_link_libraries(GameLife PUBLIC ${CURSES_LIBRARIES})
