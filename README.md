@@ -7,9 +7,10 @@
 
 ### Building steps
 * Clone the repository `git clone git@github.com:MaksymPrymierov/life-game.git`
-* Enter the project directory `cd life-game`
-* Start cmake `cmake .`
-* Start building `make`
+* `cd life-game`
+* `mkdir build && cd build`
+* `cmake ..`
+* `cmake --build .`
 
 ## Start the game
 After the buiding just start the binary:

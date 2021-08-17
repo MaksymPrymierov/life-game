@@ -18,5 +18,5 @@ add_executable(GameLife
         src/screen_ncurses.cpp
         )
 
-target_include_directories(GameLife PUBLIC ./include .)
+target_include_directories(GameLife PUBLIC ./include ./build)
 target_link_libraries(GameLife ${CURSES_LIBRARIES})

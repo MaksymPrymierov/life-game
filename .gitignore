@@ -4,3 +4,4 @@ config.h
 Makefile
 CMakeFiles/
 GameLife
+build/
