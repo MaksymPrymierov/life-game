@@ -22,14 +22,14 @@ screen_ncurses::~screen_ncurses()
 
 void screen_ncurses::show()
 {
-        for (int i = 1; i < this->height; ++i)
+        for (int i = 1; i < this->height + 1; ++i)
         {
-                for (int j = 1; j < this->width; ++j)
+                for (int j = 1; j < this->width + 1; ++j)
                 {
                         if (this->screen_map.at(i - 1).at(j - 1)) {
-                                mvwaddch(game_win, j, i, life);
+                                mvwaddch(game_win, i, j, life);
                         } else {
-                                mvwaddch(game_win, j, i, dead);
+                                mvwaddch(game_win, i, j, dead);
                         }
                 }
         }
@@ -40,10 +40,10 @@ void screen_ncurses::show()
 void screen_ncurses::create_window()
 {
         game_win = newwin(
-                        this->height + 1,
-                        this->width + 1,
-                        (LINES - this->height + 1) / 2,
-                        (COLS - this->width + 1) / 2
+                        this->height + 2,
+                        this->width + 2,
+                        (LINES - this->height + 2) / 2,
+                        (COLS - this->width + 2) / 2
                 );
 
         box(game_win, 0, 0);

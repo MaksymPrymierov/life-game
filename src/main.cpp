@@ -3,12 +3,16 @@
 #include <game.h>
 #include <config.h>
 #include <screen_cli.h>
+#include <screen_ncurses.h>
 
 int main()
 {
         int w;
         int h;
         int l = -1;
+        int s;
+        game_life::screen *screen;
+        game_life::game   *game;
 
         std::cout << "Game Life Version: " <<
                 GameLife_VERSION_MAJOR << "." <<
@@ -25,11 +29,22 @@ int main()
                 std::cin >> l;
         }
 
-        game_life::screen_cli screen(w, h, l);
-        game_life::game game(&screen);
+        std::cout << "Enter the screen mod\n1) native terminal\n2) ncurses\n> ";
+        std::cin >> s;
+        switch (s) {
+        case 1:
+                screen = new game_life::screen_cli(w, h, l);
+                break;
+        case 2:
+                screen = new game_life::screen_ncurses(w, h, l);
+                break;
+        default:
+                std::cout << "Error: Unknown screen" << std::endl;
+                return -1;
+        }
 
-        screen.show();
-        game.start();
+        game = new game_life::game(screen);
+        game->start();
 
         return 0;
 }
