@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(GameLife VERSION 0.2)
+project(GameLife VERSION 0.3)
 
 find_package(Curses REQUIRED)
 configure_file(include/config.h.in config.h)
