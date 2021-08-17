@@ -12,7 +12,7 @@ public:
         screen_ncurses(int w, int h, int life_prob);
         ~screen_ncurses();
 
-        void show();
+        void show() override;
 
 private:
         static constexpr inline char m_life = 'X';

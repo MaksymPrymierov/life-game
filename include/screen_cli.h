@@ -11,7 +11,7 @@ public:
         screen_cli(int x, int y, int life_prob);
         ~screen_cli();
 
-        void show();
+        void show() override;
 
 private:
         static constexpr inline char m_life = 'X';
