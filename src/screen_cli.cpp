@@ -25,7 +25,7 @@ void screen_cli::show()
         {
                 print_vboards();
                 for (int j = 0; j < m_width; ++j) {
-                        if (m_screen_map.at(i).at(j)) {
+                        if (m_screen_map[i][j]) {
                                 fmt::print(fmt::emphasis::bold |
                                         fg(fmt::color::yellow) |
                                         bg(fmt::color::black), "{}", m_life);
