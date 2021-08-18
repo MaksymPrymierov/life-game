@@ -16,7 +16,10 @@ screen_cli::~screen_cli()
 void screen_cli::show()
 {
         clear();
+
+        print_corner_top_left();
         print_hboards();
+        print_corner_top_right();
 
         for (int i = 0; i < m_height; ++i)
         {
@@ -33,7 +36,10 @@ void screen_cli::show()
                 print_vboards();
                 fmt::print("\n");
         }
+
+        print_corner_bottom_left();
         print_hboards();
+        print_corner_bottom_right();
 }
 
 void screen_cli::clear()
@@ -50,13 +56,34 @@ void screen_cli::print_vboards()
 
 void screen_cli::print_hboards()
 {
-        print_vboards();
         for (int i = 0; i < m_width; ++i) {
                 fmt::print(fg(fmt::color::red) |
                         bg(fmt::color::black), "{}", m_hboard);
         }
-        print_vboards();
-        fmt::print("\n");
+}
+
+void screen_cli::print_corner_top_left()
+{
+        fmt::print(fg(fmt::color::red) |
+                bg(fmt::color::black), "{}", m_corner_top_left);
+}
+
+void screen_cli::print_corner_top_right()
+{
+        fmt::print(fg(fmt::color::red) |
+                bg(fmt::color::black), "{}\n", m_corner_top_right);
+}
+
+void screen_cli::print_corner_bottom_left()
+{
+        fmt::print(fg(fmt::color::red) |
+                bg(fmt::color::black), "{}", m_corner_bottom_left);
+}
+
+void screen_cli::print_corner_bottom_right()
+{
+        fmt::print(fg(fmt::color::red) |
+                bg(fmt::color::black), "{}\n", m_corner_bottom_right);
 }
 
 } // game_m_life
