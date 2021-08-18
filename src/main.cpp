@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fmt/core.h>
+#include <fmt/format.h>
 
 #include <game.h>
 #include <config.h>
@@ -14,22 +16,20 @@ int main()
         game_life::screen *screen;
         game_life::game   *game;
 
-        std::cout << "Game Life Version: " <<
-                GameLife_VERSION_MAJOR << "." <<
-                GameLife_VERSION_MINOR << std::endl;
+        fmt::print("Game Life Version: {}.{}\n", GameLife_VERSION_MAJOR, GameLife_VERSION_MINOR);
 
-        std::cout << "Enter the height of the map: ";
+        fmt::print("Enter the height of the map: ");
         std::cin >> h;
 
-        std::cout << "Enter the width of the map: ";
+        fmt::print("Enter the width of the map: ");
         std::cin >> w;
 
         while (l < 0 || l > 100) {
-                std::cout << "Enter the life probability [0-100]: ";
+                fmt::print("Enter the life probability [0-100]: ");
                 std::cin >> l;
         }
 
-        std::cout << "Enter the screen mod\n1) native terminal\n2) ncurses\n> ";
+        fmt::print("Enter the screen mod\n1) native terminal\n2) ncurses\n> ");
         std::cin >> s;
         switch (s) {
         case 1:
@@ -39,7 +39,7 @@ int main()
                 screen = new game_life::screen_ncurses(w, h, l);
                 break;
         default:
-                std::cout << "Error: Unknown screen" << std::endl;
+                fmt::system_error(EINVAL, "Error: Unknown screen");
                 return -1;
         }
 

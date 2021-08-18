@@ -1,6 +1,6 @@
 #include <screen_cli.h>
 
-#include <iostream>
+#include <fmt/core.h>
 
 namespace game_life
 {
@@ -22,13 +22,13 @@ void screen_cli::show()
                 print_vboards();
                 for (int j = 0; j < m_width; ++j) {
                         if (m_screen_map.at(i).at(j)) {
-                                std::cout << m_life;
+                                fmt::print("{}", m_life);
                         } else {
-                                std::cout << m_dead;
+                                fmt::print("{}", m_dead);
                         }
                 }
                 print_vboards();
-                std::cout << '\n';
+                fmt::print("\n");
         }
         print_hboards();
 }
@@ -36,22 +36,22 @@ void screen_cli::show()
 void screen_cli::clear()
 {
         /* Clear screem. This workis for Linux and Windows */
-        std::cout << "\033[2J\033[1;1H";
+        fmt::print("\033[2J\033[1;1H");
 }
 
 void screen_cli::print_vboards()
 {
-        std::cout << m_vboard;
+        fmt::print("{}", m_vboard);
 }
 
 void screen_cli::print_hboards()
 {
         print_vboards();
         for (int i = 0; i < m_width; ++i) {
-                std::cout << m_hboard;
+                fmt::print("{}", m_hboard);
         }
         print_vboards();
-        std::cout << '\n';
+        fmt::print("\n");
 }
 
 } // game_m_life
