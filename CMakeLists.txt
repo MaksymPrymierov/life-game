@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(GameLife VERSION 0.3)
 
 find_package(Curses REQUIRED)
+find_package(fmt REQUIRED)
 configure_file(include/config.h.in config.h)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -19,4 +20,4 @@ add_executable(GameLife
         )
 
 target_include_directories(GameLife PUBLIC ./include ./build)
-target_link_libraries(GameLife PUBLIC ${CURSES_LIBRARIES})
+target_link_libraries(GameLife PUBLIC ${CURSES_LIBRARIES} fmt::fmt)
