@@ -11,6 +11,10 @@ screen_ncurses::screen_ncurses(int w, int h, int life_prob) :
         keypad(stdscr, TRUE);
         noecho();
 
+        start_color();
+        init_pair(1, COLOR_RED, COLOR_BLACK);
+        init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+
         create_window();
 }
 
@@ -22,6 +26,7 @@ screen_ncurses::~screen_ncurses()
 
 void screen_ncurses::show()
 {
+        wattron(m_game_win, COLOR_PAIR(2));
         for (int i = 1; i < m_height + 1; ++i)
         {
                 for (int j = 1; j < m_width + 1; ++j)
@@ -45,6 +50,7 @@ void screen_ncurses::create_window()
                         (LINES - m_height + 2) / 2,
                         (COLS - m_width + 2) / 2
                 );
+        wattron(m_game_win, COLOR_PAIR(1));
 
         box(m_game_win, 0, 0);
         wrefresh(m_game_win);
