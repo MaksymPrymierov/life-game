@@ -3,7 +3,7 @@
 ## Install
 
 ### Prepare before building
-* Install dependencies `sudo apt install cmake make gcc`
+* Install dependencies `sudo apt install cmake make gcc libfmt-dev`
 
 ### Building steps
 * Clone the repository `git clone git@github.com:MaksymPrymierov/life-game.git`
