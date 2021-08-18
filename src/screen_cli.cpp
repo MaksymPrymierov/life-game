@@ -1,6 +1,7 @@
 #include <screen_cli.h>
 
 #include <fmt/core.h>
+#include <fmt/color.h>
 
 namespace game_life
 {
@@ -22,9 +23,11 @@ void screen_cli::show()
                 print_vboards();
                 for (int j = 0; j < m_width; ++j) {
                         if (m_screen_map.at(i).at(j)) {
-                                fmt::print("{}", m_life);
+                                fmt::print(fmt::emphasis::bold |
+                                        fg(fmt::color::yellow) |
+                                        bg(fmt::color::black), "{}", m_life);
                         } else {
-                                fmt::print("{}", m_dead);
+                                fmt::print(bg(fmt::color::black), "{}", m_dead);
                         }
                 }
                 print_vboards();
@@ -41,14 +44,16 @@ void screen_cli::clear()
 
 void screen_cli::print_vboards()
 {
-        fmt::print("{}", m_vboard);
+        fmt::print(fg(fmt::color::red) |
+                bg(fmt::color::black), "{}", m_vboard);
 }
 
 void screen_cli::print_hboards()
 {
         print_vboards();
         for (int i = 0; i < m_width; ++i) {
-                fmt::print("{}", m_hboard);
+                fmt::print(fg(fmt::color::red) |
+                        bg(fmt::color::black), "{}", m_hboard);
         }
         print_vboards();
         fmt::print("\n");
