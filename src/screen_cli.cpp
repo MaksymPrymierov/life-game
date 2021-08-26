@@ -6,12 +6,35 @@
 namespace game_life
 {
 
+screen_cli::screen_cli()
+{  }
+
 screen_cli::screen_cli(int w, int h, int life_prob) :
         screen(w, h, life_prob)
 {  }
 
 screen_cli::~screen_cli()
 {  }
+
+void screen_cli::start()
+{
+        int w;
+        int h;
+        int l = -1;
+
+        fmt::print("Enter the width of the map: ");
+        std::cin >> w;
+
+        fmt::print("Enter the height of the map: ");
+        std::cin >> h;
+
+        while (l < 0 || l > 100) {
+                fmt::print("Enter the life probability [0-100]");
+                std::cin >> l;
+        }
+
+        screen(w, h, life_prob);
+}
 
 void screen_cli::show()
 {

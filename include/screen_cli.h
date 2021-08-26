@@ -10,9 +10,11 @@ namespace game_life
 class screen_cli : public screen
 {
 public:
+        screen_cli();
         screen_cli(int x, int y, int life_prob);
         ~screen_cli();
 
+        void start() override;
         void show() override;
 
 private:
