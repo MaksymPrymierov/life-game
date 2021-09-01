@@ -10,14 +10,25 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O2")
 
-
-add_executable(GameLife 
-        src/main.cpp
+set(GameLife_src
         src/screen_cli.cpp
         src/game.cpp
         src/screen.cpp
         src/screen_ncurses.cpp
         )
 
+add_executable(GameLife
+        src/main.cpp
+        ${GameLife_src}
+        )
+
+add_library(GameLife_lib STATIC ${GameLife_src})
+
 target_include_directories(GameLife PUBLIC ./include ./build)
+target_include_directories(GameLife_lib PUBLIC ./include)
+target_link_libraries(GameLife_lib PUBLIC ${CURSES_LIBRARIES} fmt::fmt)
 target_link_libraries(GameLife PUBLIC ${CURSES_LIBRARIES} fmt::fmt)
+
+enable_testing()
+
+add_subdirectory(test build/test)
