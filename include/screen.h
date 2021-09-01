@@ -24,9 +24,9 @@ public:
         int get_width();
 
 protected:
-        int m_height;
-        int m_width;
-        int m_life_probability;
+        int m_height = 0;
+        int m_width = 0;
+        int m_life_probability = 0;
         std::random_device m_rd;
         std::uniform_int_distribution<int> m_rd_values{0, 100};
         std::vector<std::vector<bool>> m_screen_map;
