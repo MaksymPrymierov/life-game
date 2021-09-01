@@ -1,5 +1,7 @@
 # Life Game
 
+[![CMake](https://github.com/MaksymPrymierov/life-game/actions/workflows/cmake.yml/badge.svg)](https://github.com/MaksymPrymierov/life-game/actions/workflows/cmake.yml)
+
 ## Install
 
 ### Prepare before building
