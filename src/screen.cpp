@@ -84,7 +84,7 @@ void screen::random_map_set()
 {
         for (int i = 0; i < m_height; ++i) {
                 for (int j = 0; j < m_width; ++j) {
-                        if (m_rd_values(m_rd) > m_life_probability) {
+                        if (m_rd_values(m_rd) > m_life_probability || m_life_probability == 0) {
                                 m_screen_map[i][j] = false;
                         } else {
                                 m_screen_map[i][j] = true;
