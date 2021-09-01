@@ -9,10 +9,13 @@ namespace game_life
 class screen
 {
 public:
+        screen() = default;
         screen(int w, int h, int life_prob);
         virtual ~screen() = default;
 
+        virtual void start();
         virtual void show() = 0;
+
         void set_pixel(int x, int y);
         void unset_pixel(int x, int y);
 

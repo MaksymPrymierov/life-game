@@ -3,6 +3,8 @@
 #include <fmt/core.h>
 #include <fmt/color.h>
 
+#include <iostream>
+
 namespace game_life
 {
 

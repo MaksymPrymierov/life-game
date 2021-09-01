@@ -10,6 +10,7 @@ namespace game_life
 class screen_cli : public screen
 {
 public:
+        screen_cli() = default;
         screen_cli(int x, int y, int life_prob);
         ~screen_cli();
 

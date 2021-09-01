@@ -9,9 +9,11 @@ namespace game_life
 class screen_ncurses : public screen
 {
 public:
+        screen_ncurses() = default;
         screen_ncurses(int w, int h, int life_prob);
         ~screen_ncurses();
 
+        void start() override;
         void show() override;
 
 private:

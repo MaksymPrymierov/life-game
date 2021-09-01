@@ -1,5 +1,9 @@
 #include <screen.h>
 
+#include <fmt/core.h>
+
+#include <iostream>
+
 namespace game_life
 {
 
@@ -8,6 +12,34 @@ screen::screen(int w, int h, int life_prob) :
         m_width(w),
         m_life_probability(life_prob)  
 {  
+        m_screen_map.resize(m_height);
+        for (auto &i : m_screen_map) {
+                i.resize(static_cast<std::size_t>(m_width));
+        }
+        random_map_set();
+}
+
+void screen::start()
+{
+        int w;
+        int h;
+        int l = -1;
+
+        fmt::print("Enter the width of the map: ");
+        std::cin >> w;
+
+        fmt::print("Enter the height of the map: ");
+        std::cin >> h;
+
+        while (l < 0 || l > 100) {
+                fmt::print("Enter the life probability [0-100] ");
+                std::cin >> l;
+        }
+
+        m_height = h;
+        m_width = w;
+        m_life_probability = l;
+
         m_screen_map.resize(m_height);
         for (auto &i : m_screen_map) {
                 i.resize(static_cast<std::size_t>(m_width));

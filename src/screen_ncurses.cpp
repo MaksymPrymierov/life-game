@@ -5,7 +5,18 @@ namespace game_life
 
 screen_ncurses::screen_ncurses(int w, int h, int life_prob) :
         screen(w, h, life_prob)
+{  }
+
+screen_ncurses::~screen_ncurses()
 {
+        delwin(m_game_win);
+        endwin();
+}
+
+void screen_ncurses::start()
+{
+        screen::start();
+
         initscr();
         cbreak();
         keypad(stdscr, TRUE);
@@ -16,12 +27,6 @@ screen_ncurses::screen_ncurses(int w, int h, int life_prob) :
         init_pair(2, COLOR_YELLOW, COLOR_BLACK);
 
         create_window();
-}
-
-screen_ncurses::~screen_ncurses()
-{
-        delwin(m_game_win);
-        endwin();
 }
 
 void screen_ncurses::show()
