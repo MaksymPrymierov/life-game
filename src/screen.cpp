@@ -7,11 +7,18 @@
 namespace game_life
 {
 
-screen::screen(int w, int h, int life_prob) :
-        m_height(h),
-        m_width(w),
-        m_life_probability(life_prob)  
-{  
+screen::screen(int w, int h, int life_prob)
+{
+        if (w >= 0 && h >= 0 && life_prob >= 0 && life_prob <= 100) {
+                m_height = h;
+                m_width = w;
+                m_life_probability = life_prob;
+        } else {
+                m_height = 0;
+                m_width = 0;
+                m_life_probability = 0;
+        }
+
         m_screen_map.resize(m_height);
         for (auto &i : m_screen_map) {
                 i.resize(static_cast<std::size_t>(m_width));
