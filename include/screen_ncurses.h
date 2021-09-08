@@ -26,6 +26,7 @@ private:
         WINDOW *m_game_win;
 
         void create_window();
+        void setup_options();
 };
 
 };
