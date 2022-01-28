@@ -5,6 +5,7 @@
 #include <game.h>
 #include <screen_cli.h>
 #include <screen_ncurses.h>
+#include <screen_sdl.h>
 
 void help() {
   fmt::print(fg(fmt::color::yellow), "Usage: ./GameLife [options]\n");
@@ -14,6 +15,7 @@ void help() {
   fmt::print("  -h --help\tPrint the help page\n");
   fmt::print(
       "  -n --ncurses\tStart the game with ncurses command line interface\n");
+  fmt::print("  -s --sdl\tStart the game with sdl graphic library\n");
   fmt::print("  -v --version\tPrint version\n");
 
   fmt::print(
@@ -52,6 +54,15 @@ int main(int argc, char *argv[]) {
       if (!is_game_screen) {
         is_game_screen = true;
         screen = new game_life::screen_ncurses;
+      } else {
+        fmt::print(fg(fmt::color::red),
+                   "Error: You can choose only one game screen\n");
+        return -1;
+      }
+    } else if (i == "--sdl" || i == "-s") {
+      if (!is_game_screen) {
+        is_game_screen = true;
+        screen = new game_life::screen_sdl;
       } else {
         fmt::print(fg(fmt::color::red),
                    "Error: You can choose only one game screen\n");

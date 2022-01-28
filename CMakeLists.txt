@@ -15,6 +15,7 @@ set(GameLife_src
         src/game.cpp
         src/screen.cpp
         src/screen_ncurses.cpp
+        src/screen_sdl.cpp
         )
 
 add_executable(GameLife
