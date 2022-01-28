@@ -35,10 +35,12 @@ class screen_sdl : public screen {
   SDL_Surface* background_surface;
   SDL_Window* window;
   SDL_Rect* cell;
+  SDL_Event e;
 
   void set_background();
   void update();
   void set_cell(unsigned int x, unsigned int y, color c);
+  void handle_events();
 };
 
 }  // namespace game_life

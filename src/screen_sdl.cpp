@@ -65,7 +65,10 @@ void screen_sdl::set_background() {
                           dead_color.g, dead_color.b));
 }
 
-void screen_sdl::update() { SDL_UpdateWindowSurface(window); }
+void screen_sdl::update() {
+  handle_events();
+  SDL_UpdateWindowSurface(window);
+}
 
 void screen_sdl::set_cell(unsigned int x, unsigned int y, color c) {
   if (x >= GAME_SCREEN_WIDTH || y >= GAME_SCREEN_HEIGHT) {
@@ -77,6 +80,20 @@ void screen_sdl::set_cell(unsigned int x, unsigned int y, color c) {
 
   SDL_FillRect(background_surface, cell,
                SDL_MapRGB(background_surface->format, c.r, c.g, c.b));
+}
+
+void screen_sdl::handle_events() {
+  while (SDL_PollEvent(&e)) {
+    if (e.type == SDL_QUIT) {
+      need_exit = true;
+    }
+
+    if (e.type == SDL_KEYDOWN) {
+      if (e.key.keysym.sym == SDLK_ESCAPE) {
+        need_exit = true;
+      }
+    }
+  }
 }
 
 }  // namespace game_life
