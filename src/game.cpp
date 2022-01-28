@@ -11,7 +11,7 @@ game::game(screen *s) : m_screen(s) {}
 game::~game() {}
 
 void game::start() {
-  while (1) {
+  while (m_screen->exit()) {
     std::this_thread::sleep_for(std::chrono::milliseconds(m_game_cycle_delay));
     scan_map();
     process_actions();

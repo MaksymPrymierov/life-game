@@ -21,6 +21,8 @@ class screen {
   int get_height();
   int get_width();
 
+  bool exit();
+
  protected:
   int m_height = 0;
   int m_width = 0;
@@ -28,6 +30,7 @@ class screen {
   std::random_device m_rd;
   std::uniform_int_distribution<int> m_rd_values{0, 100};
   std::vector<std::vector<bool>> m_screen_map;
+  bool need_exit = false;
 
   void random_map_set();
 };

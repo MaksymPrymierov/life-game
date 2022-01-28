@@ -86,4 +86,6 @@ void screen::random_map_set() {
   }
 }
 
+bool screen::exit() { return !need_exit; }
+
 };  // namespace game_life
