@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
   }
 
   if (argc == 1) {
-    screen = new game_life::screen_ncurses;
+    screen = new game_life::screen_sdl;
     is_game_screen = true;
   }
 
