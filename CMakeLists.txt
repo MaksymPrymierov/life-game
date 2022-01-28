@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(GameLife VERSION 0.5)
+project(GameLife VERSION 0.6)
 
 find_package(Curses REQUIRED)
 find_package(fmt REQUIRED)
