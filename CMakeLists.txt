@@ -4,6 +4,7 @@ project(GameLife VERSION 0.5)
 
 find_package(Curses REQUIRED)
 find_package(fmt REQUIRED)
+find_package(SDL2 REQUIRED)
 configure_file(include/config.h.in config.h)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -25,10 +26,28 @@ add_executable(GameLife
 
 add_library(GameLife_lib STATIC ${GameLife_src})
 
-target_include_directories(GameLife PUBLIC ./include ./build)
-target_include_directories(GameLife_lib PUBLIC ./include)
-target_link_libraries(GameLife_lib PUBLIC ${CURSES_LIBRARIES} fmt::fmt)
-target_link_libraries(GameLife PUBLIC ${CURSES_LIBRARIES} fmt::fmt)
+target_include_directories(GameLife PUBLIC
+        ${SDL2_INCLUDE_DIRS}
+        ./include
+        ./build
+        )
+
+target_include_directories(GameLife_lib PUBLIC
+        ${SDL2_INCLUDE_DIRS}
+        ./include
+        )
+
+target_link_libraries(GameLife_lib PUBLIC
+        ${CURSES_LIBRARIES}
+        ${SDL2_LIBRARIES}
+        fmt::fmt
+        )
+
+target_link_libraries(GameLife PUBLIC
+        ${CURSES_LIBRARIES}
+        ${SDL2_LIBRARIES}
+        fmt::fmt
+        )
 
 enable_testing()
 
