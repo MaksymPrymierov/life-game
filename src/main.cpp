@@ -12,7 +12,7 @@ void help()
 {
         fmt::print(fg(fmt::color::yellow), "Usage: ./GameLife [options]\n");
         fmt::print("Options:\n");
-        fmt::print("  -c --cli\tStart the game with default comand line interface\n");
+        fmt::print("  -c --cli\tStart the game with default command line interface\n");
         fmt::print("  -h --help\tPrint the help page\n");
         fmt::print("  -n --ncurses\tStart the game with ncurses command line interface\n");
         fmt::print("  -v --version\tPrint version\n");
