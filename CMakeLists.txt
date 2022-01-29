@@ -5,6 +5,7 @@ project(GameLife VERSION 0.6)
 find_package(Curses REQUIRED)
 find_package(fmt REQUIRED)
 find_package(SDL2 REQUIRED)
+find_package(Boost COMPONENTS program_options REQUIRED)
 configure_file(include/config.h.in config.h)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -41,12 +42,14 @@ target_include_directories(GameLife_lib PUBLIC
 target_link_libraries(GameLife_lib PUBLIC
         ${CURSES_LIBRARIES}
         ${SDL2_LIBRARIES}
+        ${Boost_LIBRARIES}
         fmt::fmt
         )
 
 target_link_libraries(GameLife PUBLIC
         ${CURSES_LIBRARIES}
         ${SDL2_LIBRARIES}
+        ${Boost_LIBRARIES}
         fmt::fmt
         )
 
