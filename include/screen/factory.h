@@ -3,6 +3,7 @@
 #include <screen/creator.h>
 
 #include <map>
+#include <memory>
 #include <string>
 
 namespace game_life {
@@ -12,10 +13,10 @@ class screen_factory {
   screen_factory();
   ~screen_factory();
 
-  screen* get(std::string key);
+  std::unique_ptr<screen> get(std::string key);
 
  private:
-  std::map<std::string, abstract_screen_creator*> screens;
+  std::map<std::string, std::unique_ptr<abstract_screen_creator>> screens;
 };
 
 }  // namespace game_life

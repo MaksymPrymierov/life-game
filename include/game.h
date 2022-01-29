@@ -2,13 +2,14 @@
 
 #include <screen.h>
 
+#include <memory>
 #include <stack>
 
 namespace game_life {
 
 class game {
  public:
-  game(screen *s);
+  game(std::unique_ptr<screen>& s);
   ~game();
 
   void start();
@@ -25,7 +26,7 @@ class game {
   static constexpr inline unsigned int m_game_cycle_delay =
       100;  // milliseconds
   std::stack<action_data> m_actions_stack;
-  screen *m_screen;
+  std::unique_ptr<screen> m_screen;
 
   void scan_map();
   void process_actions();

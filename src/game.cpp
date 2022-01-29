@@ -6,7 +6,7 @@
 
 namespace game_life {
 
-game::game(screen *s) : m_screen(s) {}
+game::game(std::unique_ptr<screen>& s) { m_screen = std::move(s); }
 
 game::~game() {}
 
