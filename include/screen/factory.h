@@ -16,7 +16,8 @@ class screen_factory {
   std::unique_ptr<screen> get(std::string key);
 
  private:
-  std::map<std::string, std::unique_ptr<abstract_screen_creator>> screens;
+  std::map<std::string, std::unique_ptr<abstract_screen_creator>>
+      m_screen_creators;
 };
 
 }  // namespace game_life

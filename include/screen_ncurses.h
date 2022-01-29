@@ -21,7 +21,7 @@ class screen_ncurses : public screen {
   static constexpr inline char m_hboard = '-';
   static constexpr inline char m_corner = '+';
 
-  WINDOW *m_game_win;
+  WINDOW *m_game_win_ptr;
 
   void create_window();
   void setup_options();

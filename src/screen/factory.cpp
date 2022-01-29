@@ -6,15 +6,16 @@
 namespace game_life {
 
 screen_factory::screen_factory() {
-  screens["cli"] = std::make_unique<screen_creator<screen_cli>>();
-  screens["ncurses"] = std::make_unique<screen_creator<screen_ncurses>>();
-  screens["sdl"] = std::make_unique<screen_creator<screen_sdl>>();
+  m_screen_creators["cli"] = std::make_unique<screen_creator<screen_cli>>();
+  m_screen_creators["ncurses"] =
+      std::make_unique<screen_creator<screen_ncurses>>();
+  m_screen_creators["sdl"] = std::make_unique<screen_creator<screen_sdl>>();
 }
 
 screen_factory::~screen_factory() {}
 
 std::unique_ptr<screen> screen_factory::get(std::string key) {
-  return screens[key]->create();
+  return m_screen_creators[key]->create();
 }
 
 }  // namespace game_life

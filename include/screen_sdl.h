@@ -23,21 +23,21 @@ class screen_sdl : public screen {
     int b;
   };
 
-  const unsigned int SCREEN_WIDTH = 1280;
-  const unsigned int SCREEN_HEIGHT = 720;
-  const unsigned int CELL_WIDTH = 20;
-  const unsigned int CELL_HEIGHT = 20;
-  const unsigned int GAME_SCREEN_WIDTH = 64;
-  const unsigned int GAME_SCREEN_HEIGHT = 36;
-  const unsigned int GAME_LIFE_PROBABILITY = 25;
+  static constexpr const unsigned int m_screen_width = 1280;
+  static constexpr const unsigned int m_screen_height = 720;
+  static constexpr const unsigned int m_cell_width = 20;
+  static constexpr const unsigned int m_cell_height = 20;
+  static constexpr const unsigned int m_game_screen_width = 64;
+  static constexpr const unsigned int m_game_screen_height = 36;
+  static constexpr const unsigned int m_game_life_probability = 25;
 
-  const color dead_color = {0, 153, 153};
-  const color life_color = {255, 135, 0};
+  const color m_dead_color = {0, 153, 153};
+  const color m_life_color = {255, 135, 0};
 
-  SDL_Event e;
-  SDL_Surface* background_surface;
-  SDL_Window* window;
-  std::unique_ptr<SDL_Rect> cell;
+  SDL_Event m_event;
+  SDL_Surface* m_background_surface_ptr;
+  SDL_Window* m_window_ptr;
+  std::unique_ptr<SDL_Rect> m_cell_ptr;
 
   void set_background();
   void update();

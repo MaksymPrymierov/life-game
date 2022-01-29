@@ -9,7 +9,7 @@ namespace game_life {
 screen_sdl::screen_sdl(int w, int h, int life_prob) : screen(w, h, life_prob) {}
 
 screen_sdl::~screen_sdl() {
-  SDL_DestroyWindow(window);
+  SDL_DestroyWindow(m_window_ptr);
   SDL_Quit();
 }
 
@@ -18,19 +18,19 @@ void screen_sdl::start() {
     return;
   }
 
-  window = SDL_CreateWindow("Life Game", SDL_WINDOWPOS_UNDEFINED,
-                            SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
-                            SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+  m_window_ptr = SDL_CreateWindow("Life Game", SDL_WINDOWPOS_UNDEFINED,
+                                  SDL_WINDOWPOS_UNDEFINED, m_screen_width,
+                                  m_screen_height, SDL_WINDOW_SHOWN);
 
-  if (!window) {
+  if (!m_window_ptr) {
     fmt::print(fg(fmt::color::red), "Error: SDL Window can't create!");
   }
 
-  background_surface = SDL_GetWindowSurface(window);
+  m_background_surface_ptr = SDL_GetWindowSurface(m_window_ptr);
 
-  m_width = GAME_SCREEN_WIDTH;
-  m_height = GAME_SCREEN_HEIGHT;
-  m_life_probability = GAME_LIFE_PROBABILITY;
+  m_width = m_game_screen_width;
+  m_height = m_game_screen_height;
+  m_life_probability = m_game_life_probability;
 
   m_screen_map.resize(m_height);
   for (auto &i : m_screen_map) {
@@ -38,7 +38,7 @@ void screen_sdl::start() {
   }
   random_map_set();
 
-  cell = std::make_unique<SDL_Rect>(0, 0, CELL_WIDTH, CELL_HEIGHT);
+  m_cell_ptr = std::make_unique<SDL_Rect>(0, 0, m_cell_width, m_cell_height);
 
   set_background();
 }
@@ -47,9 +47,9 @@ void screen_sdl::show() {
   for (int i = 0; i < m_height; ++i) {
     for (int j = 0; j < m_width; ++j) {
       if (m_screen_map.at(i).at(j)) {
-        set_cell(j, i, life_color);
+        set_cell(j, i, m_life_color);
       } else {
-        set_cell(j, i, dead_color);
+        set_cell(j, i, m_dead_color);
       }
     }
   }
@@ -58,36 +58,36 @@ void screen_sdl::show() {
 }
 
 void screen_sdl::set_background() {
-  SDL_FillRect(background_surface, NULL,
-               SDL_MapRGB(background_surface->format, dead_color.r,
-                          dead_color.g, dead_color.b));
+  SDL_FillRect(m_background_surface_ptr, NULL,
+               SDL_MapRGB(m_background_surface_ptr->format, m_dead_color.r,
+                          m_dead_color.g, m_dead_color.b));
 }
 
 void screen_sdl::update() {
   handle_events();
-  SDL_UpdateWindowSurface(window);
+  SDL_UpdateWindowSurface(m_window_ptr);
 }
 
 void screen_sdl::set_cell(unsigned int x, unsigned int y, color c) {
-  if (x >= GAME_SCREEN_WIDTH || y >= GAME_SCREEN_HEIGHT) {
+  if (x >= m_game_screen_width || y >= m_game_screen_height) {
     return;
   }
 
-  cell->x = x * CELL_WIDTH;
-  cell->y = y * CELL_HEIGHT;
+  m_cell_ptr->x = x * m_cell_width;
+  m_cell_ptr->y = y * m_cell_height;
 
-  SDL_FillRect(background_surface, cell.get(),
-               SDL_MapRGB(background_surface->format, c.r, c.g, c.b));
+  SDL_FillRect(m_background_surface_ptr, m_cell_ptr.get(),
+               SDL_MapRGB(m_background_surface_ptr->format, c.r, c.g, c.b));
 }
 
 void screen_sdl::handle_events() {
-  while (SDL_PollEvent(&e)) {
-    if (e.type == SDL_QUIT) {
+  while (SDL_PollEvent(&m_event)) {
+    if (m_event.type == SDL_QUIT) {
       need_exit = true;
     }
 
-    if (e.type == SDL_KEYDOWN) {
-      if (e.key.keysym.sym == SDLK_ESCAPE) {
+    if (m_event.type == SDL_KEYDOWN) {
+      if (m_event.key.keysym.sym == SDLK_ESCAPE) {
         need_exit = true;
       }
     }
