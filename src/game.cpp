@@ -1,3 +1,6 @@
+#include <fmt/color.h>
+#include <fmt/core.h>
+#include <fmt/format.h>
 #include <game.h>
 #include <unistd.h>
 
@@ -10,13 +13,21 @@ game::game(std::unique_ptr<screen>& s) { m_screen = std::move(s); }
 
 game::~game() {}
 
-void game::start() {
+int game::start() {
+  if (!is_valid()) {
+    fmt::print(fg(fmt::color::red), "Error: Game loaded incorrectly!\n");
+    return -1;
+  }
+  fmt::print("Loading game...\n");
+
   while (m_screen->exit()) {
     std::this_thread::sleep_for(std::chrono::milliseconds(m_game_cycle_delay));
     scan_map();
     process_actions();
     m_screen->show();
   }
+
+  return 0;
 }
 
 void game::scan_map() {
@@ -68,6 +79,14 @@ void game::process_actions() {
     }
     m_actions_stack.pop();
   }
+}
+
+bool game::is_valid() {
+  if (m_screen.get() == nullptr) {
+    return false;
+  }
+
+  return true;
 }
 
 }  // namespace game_life

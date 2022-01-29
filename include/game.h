@@ -12,7 +12,8 @@ class game {
   game(std::unique_ptr<screen>& s);
   ~game();
 
-  void start();
+  int start();
+  bool is_valid();
 
  private:
   enum class actions { life = 0, dead };
