@@ -3,9 +3,7 @@
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include <game.h>
-#include <screen_cli.h>
-#include <screen_ncurses.h>
-#include <screen_sdl.h>
+#include <screen/factory.h>
 
 void help() {
   fmt::print(fg(fmt::color::yellow), "Usage: ./GameLife [options]\n");
@@ -26,6 +24,7 @@ void help() {
 int main(int argc, char *argv[]) {
   game_life::screen *screen;
   game_life::game *game;
+  game_life::screen_factory scr_factory;
   std::vector<std::string> args;
   bool is_game_screen = false;
 
@@ -34,7 +33,7 @@ int main(int argc, char *argv[]) {
   }
 
   if (argc == 1) {
-    screen = new game_life::screen_sdl;
+    screen = scr_factory.get("sdl");
     is_game_screen = true;
   }
 
@@ -44,7 +43,7 @@ int main(int argc, char *argv[]) {
     } else if (i == "--cli" || i == "-c") {
       if (!is_game_screen) {
         is_game_screen = true;
-        screen = new game_life::screen_cli;
+        screen = scr_factory.get("cli");
       } else {
         fmt::print(fg(fmt::color::red),
                    "Error: You can choose only one game screen\n");
@@ -53,7 +52,7 @@ int main(int argc, char *argv[]) {
     } else if (i == "--ncurses" || i == "-n") {
       if (!is_game_screen) {
         is_game_screen = true;
-        screen = new game_life::screen_ncurses;
+        screen = scr_factory.get("ncurses");
       } else {
         fmt::print(fg(fmt::color::red),
                    "Error: You can choose only one game screen\n");
@@ -62,7 +61,7 @@ int main(int argc, char *argv[]) {
     } else if (i == "--sdl" || i == "-s") {
       if (!is_game_screen) {
         is_game_screen = true;
-        screen = new game_life::screen_sdl;
+        screen = scr_factory.get("sdl");
       } else {
         fmt::print(fg(fmt::color::red),
                    "Error: You can choose only one game screen\n");
@@ -84,6 +83,8 @@ int main(int argc, char *argv[]) {
   screen->start();
   game = new game_life::game(screen);
   game->start();
+
+  delete screen;
 
   return 0;
 }
