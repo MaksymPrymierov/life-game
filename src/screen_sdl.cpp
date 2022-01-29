@@ -11,8 +11,6 @@ screen_sdl::screen_sdl(int w, int h, int life_prob) : screen(w, h, life_prob) {}
 screen_sdl::~screen_sdl() {
   SDL_DestroyWindow(window);
   SDL_Quit();
-
-  delete cell;
 }
 
 void screen_sdl::start() {
@@ -40,7 +38,7 @@ void screen_sdl::start() {
   }
   random_map_set();
 
-  cell = new SDL_Rect(0, 0, CELL_WIDTH, CELL_HEIGHT);
+  cell = std::make_unique<SDL_Rect>(0, 0, CELL_WIDTH, CELL_HEIGHT);
 
   set_background();
 }
@@ -78,7 +76,7 @@ void screen_sdl::set_cell(unsigned int x, unsigned int y, color c) {
   cell->x = x * CELL_WIDTH;
   cell->y = y * CELL_HEIGHT;
 
-  SDL_FillRect(background_surface, cell,
+  SDL_FillRect(background_surface, cell.get(),
                SDL_MapRGB(background_surface->format, c.r, c.g, c.b));
 }
 

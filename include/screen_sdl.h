@@ -3,6 +3,8 @@
 #include <SDL2/SDL.h>
 #include <screen.h>
 
+#include <memory>
+
 namespace game_life {
 
 class screen_sdl : public screen {
@@ -32,10 +34,10 @@ class screen_sdl : public screen {
   const color dead_color = {0, 153, 153};
   const color life_color = {255, 135, 0};
 
+  SDL_Event e;
   SDL_Surface* background_surface;
   SDL_Window* window;
-  SDL_Rect* cell;
-  SDL_Event e;
+  std::unique_ptr<SDL_Rect> cell;
 
   void set_background();
   void update();
