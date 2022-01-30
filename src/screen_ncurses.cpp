@@ -21,7 +21,7 @@ void screen_ncurses::start() {
 
   start_color();
   init_pair(1, COLOR_RED, COLOR_BLACK);
-  init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(2, COLOR_WHITE, COLOR_BLACK);
 
   setup_options();
   refresh();
@@ -47,6 +47,13 @@ void screen_ncurses::show() {
   }
 
   wrefresh(m_game_win_ptr);
+}
+
+void screen_ncurses::print_life_status(size_t life_status, size_t dead_status) {
+  wattron(m_game_win_ptr, COLOR_PAIR(2));
+  wprintw(m_game_win_ptr, " Life status: [%lu], Dead status [%lu]", life_status,
+          dead_status);
+  wattron(m_game_win_ptr, COLOR_PAIR(1));
 }
 
 void screen_ncurses::create_window() {

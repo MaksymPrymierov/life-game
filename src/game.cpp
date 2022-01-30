@@ -9,7 +9,9 @@
 
 namespace game_life {
 
-game::game(std::unique_ptr<screen>& s) { m_screen = std::move(s); }
+game::game(std::unique_ptr<screen>& s) : m_life_size(0), m_dead_size(0) {
+  m_screen = std::move(s);
+}
 
 game::~game() {}
 
@@ -18,13 +20,13 @@ int game::start() {
     fmt::print(fg(fmt::color::red), "Error: Game loaded incorrectly!\n");
     return -1;
   }
-  fmt::print("Loading game...\n");
 
   while (m_screen->exit()) {
     std::this_thread::sleep_for(std::chrono::milliseconds(m_game_cycle_delay));
     scan_map();
     process_actions();
     m_screen->show();
+    m_screen->print_life_status(m_life_size, m_dead_size);
   }
 
   return 0;
@@ -32,6 +34,9 @@ int game::start() {
 
 void game::scan_map() {
   int life_count = 0;
+  m_life_size = 0;
+  m_dead_size = 0;
+
   for (int i = 0; i < m_screen->get_height(); ++i) {
     for (int j = 0; j < m_screen->get_width(); ++j) {
       life_count = 0;
@@ -65,6 +70,12 @@ void game::scan_map() {
       } else if (m_screen->get_pixel(j, i) &&
                  (life_count > 3 || life_count < 2)) {
         m_actions_stack.push({actions::dead, j, i});
+      }
+
+      if (m_screen->get_pixel(i, j)) {
+        ++m_life_size;
+      } else {
+        ++m_dead_size;
       }
     }
   }

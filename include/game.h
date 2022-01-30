@@ -28,6 +28,8 @@ class game {
       100;  // milliseconds
   std::stack<action_data> m_actions_stack;
   std::unique_ptr<screen> m_screen;
+  size_t m_life_size;
+  size_t m_dead_size;
 
   void scan_map();
   void process_actions();

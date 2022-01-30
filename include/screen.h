@@ -13,6 +13,7 @@ class screen {
 
   virtual void start();
   virtual void show() = 0;
+  virtual void print_life_status(size_t life_status, size_t dead_status);
 
   void set_pixel(int x, int y);
   void unset_pixel(int x, int y);

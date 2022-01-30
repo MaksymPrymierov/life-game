@@ -13,6 +13,7 @@ class screen_ncurses : public screen {
 
   void start() override;
   void show() override;
+  void print_life_status(size_t life_status, size_t dead_status) override;
 
  private:
   static constexpr inline char m_life = 'X';

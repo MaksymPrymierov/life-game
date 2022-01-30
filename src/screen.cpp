@@ -50,6 +50,10 @@ void screen::start() {
   random_map_set();
 }
 
+void screen::print_life_status(size_t life_status, size_t dead_status) {
+  fmt::print("Life cell: [{}], Dead cell: [{}]\n", life_status, dead_status);
+}
+
 void screen::set_pixel(int x, int y) {
   if (y < m_height && y >= 0 && x < m_width && x >= 0) {
     m_screen_map[y][x] = true;
