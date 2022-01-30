@@ -1,6 +1,7 @@
 # Life Game
 
 [![CMake](https://github.com/MaksymPrymierov/life-game/actions/workflows/cmake.yml/badge.svg)](https://github.com/MaksymPrymierov/life-game/actions/workflows/cmake.yml)
+[![Softacheck](https://softacheck.com/app/repository/MaksymPrymierov/life-game/badge)](https://softacheck.com/app/repository/MaksymPrymierov/life-game/issues)
 
 ## Install
 
