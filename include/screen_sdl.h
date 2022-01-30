@@ -23,13 +23,13 @@ class screen_sdl : public screen {
     int b;
   };
 
-  static constexpr const unsigned int m_screen_width = 1280;
-  static constexpr const unsigned int m_screen_height = 720;
-  static constexpr const unsigned int m_cell_width = 20;
-  static constexpr const unsigned int m_cell_height = 20;
-  static constexpr const unsigned int m_game_screen_width = 64;
-  static constexpr const unsigned int m_game_screen_height = 36;
-  static constexpr const unsigned int m_game_life_probability = 25;
+  static constexpr inline const unsigned int m_screen_width = 1280;
+  static constexpr inline const unsigned int m_screen_height = 720;
+  static constexpr inline const unsigned int m_cell_width = 20;
+  static constexpr inline const unsigned int m_cell_height = 20;
+  static constexpr inline const unsigned int m_game_screen_width = 64;
+  static constexpr inline const unsigned int m_game_screen_height = 36;
+  static constexpr inline const unsigned int m_game_life_probability = 25;
 
   const color m_dead_color = {0, 153, 153};
   const color m_life_color = {255, 135, 0};
