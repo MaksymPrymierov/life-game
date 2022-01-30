@@ -26,16 +26,17 @@ void screen_ncurses::start() {
   setup_options();
   refresh();
 
-  m_screen_map.resize(m_height);
-  for (auto &i : m_screen_map) {
-    i.resize(static_cast<std::size_t>(m_width));
-  }
+  alloc_screen_map();
   random_map_set();
 
   create_window();
 }
 
-void screen_ncurses::show() {
+int screen_ncurses::show() {
+  if (!is_valid()) {
+    return -1;
+  }
+
   for (int i = 1; i < m_height + 1; ++i) {
     for (int j = 1; j < m_width + 1; ++j) {
       if (m_screen_map.at(i - 1).at(j - 1)) {
@@ -47,6 +48,8 @@ void screen_ncurses::show() {
   }
 
   wrefresh(m_game_win_ptr);
+
+  return 0;
 }
 
 void screen_ncurses::print_life_status(size_t life_status, size_t dead_status) {

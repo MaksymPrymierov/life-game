@@ -12,7 +12,7 @@ class screen_cli : public screen {
   screen_cli(int x, int y, int life_prob);
   ~screen_cli();
 
-  void show() override;
+  int show() override;
 
  private:
   static constexpr inline std::string_view m_life = "▣";

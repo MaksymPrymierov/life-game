@@ -32,10 +32,7 @@ void screen_sdl::start() {
   m_height = m_game_screen_height;
   m_life_probability = m_game_life_probability;
 
-  m_screen_map.resize(m_height);
-  for (auto &i : m_screen_map) {
-    i.resize(static_cast<std::size_t>(m_width));
-  }
+  alloc_screen_map();
   random_map_set();
 
   m_cell_ptr = std::make_unique<SDL_Rect>(0, 0, m_cell_width, m_cell_height);
@@ -43,7 +40,11 @@ void screen_sdl::start() {
   set_background();
 }
 
-void screen_sdl::show() {
+int screen_sdl::show() {
+  if (!is_valid()) {
+    return -1;
+  }
+
   for (int i = 0; i < m_height; ++i) {
     for (int j = 0; j < m_width; ++j) {
       if (m_screen_map.at(i).at(j)) {
@@ -55,6 +56,8 @@ void screen_sdl::show() {
   }
 
   update();
+
+  return 0;
 }
 
 void screen_sdl::set_background() {

@@ -25,7 +25,13 @@ int game::start() {
     std::this_thread::sleep_for(std::chrono::milliseconds(m_game_cycle_delay));
     scan_map();
     process_actions();
-    m_screen->show();
+
+    if (m_screen->show()) {
+      fmt::print(fg(fmt::color::red),
+                 "Error: Game screen loaded incorrectly!\n");
+      return -1;
+    }
+
     m_screen->print_life_status(m_life_size, m_dead_size);
   }
 

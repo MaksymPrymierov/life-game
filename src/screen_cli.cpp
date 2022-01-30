@@ -10,7 +10,11 @@ screen_cli::screen_cli(int w, int h, int life_prob) : screen(w, h, life_prob) {}
 
 screen_cli::~screen_cli() {}
 
-void screen_cli::show() {
+int screen_cli::show() {
+  if (!is_valid()) {
+    return -1;
+  }
+
   clear();
 
   print_corner_top_left();
@@ -35,6 +39,8 @@ void screen_cli::show() {
   print_corner_bottom_left();
   print_hboards();
   print_corner_bottom_right();
+
+  return 0;
 }
 
 void screen_cli::clear() {

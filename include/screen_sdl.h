@@ -14,7 +14,7 @@ class screen_sdl : public screen {
   ~screen_sdl();
 
   void start() override;
-  void show() override;
+  int show() override;
 
  private:
   struct color {

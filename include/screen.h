@@ -12,7 +12,7 @@ class screen {
   virtual ~screen() = default;
 
   virtual void start();
-  virtual void show() = 0;
+  virtual int show() = 0;
   virtual void print_life_status(size_t life_status, size_t dead_status);
 
   void set_pixel(int x, int y);
@@ -22,6 +22,7 @@ class screen {
   int get_height();
   int get_width();
 
+  bool is_valid();
   bool exit();
 
  protected:
@@ -34,6 +35,7 @@ class screen {
   bool need_exit = false;
 
   void random_map_set();
+  void alloc_screen_map();
 };
 
 }  // namespace game_life
