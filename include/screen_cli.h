@@ -13,6 +13,7 @@ class screen_cli : public screen {
   ~screen_cli();
 
   int show() override;
+  void print_life_status(size_t life_status, size_t dead_status) override;
 
  private:
   static constexpr inline std::string_view m_life = "▣";
@@ -31,6 +32,10 @@ class screen_cli : public screen {
   void print_corner_top_right();
   void print_corner_bottom_left();
   void print_corner_bottom_right();
+
+  size_t m_old_life = 0;
+  size_t m_old_dead = 0;
+  size_t m_old_time = 0;
 };
 
 }  // namespace game_life

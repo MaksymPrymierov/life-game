@@ -78,4 +78,20 @@ void screen_cli::print_corner_bottom_right() {
              m_corner_bottom_right);
 }
 
+void screen_cli::print_life_status(size_t life_status, size_t dead_status) {
+  fmt::print("Life cell: [{}], Dead cell: [{}]\n", life_status, dead_status);
+
+  if (m_old_life == life_status && m_old_dead == dead_status) {
+    ++m_old_time;
+    if (m_old_time == 10) {
+      fmt::print("End!\n");
+      need_exit = true;
+    }
+  } else {
+    m_old_time = 0;
+    m_old_life = life_status;
+    m_old_dead = dead_status;
+  }
+}
+
 }  // namespace game_life
