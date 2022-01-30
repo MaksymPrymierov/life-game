@@ -13,7 +13,7 @@ class screen_factory {
   screen_factory();
   ~screen_factory();
 
-  std::unique_ptr<screen> get(std::string key);
+  std::unique_ptr<screen> get(const std::string& key);
 
  private:
   std::map<std::string, std::unique_ptr<abstract_screen_creator>>

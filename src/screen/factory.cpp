@@ -14,7 +14,7 @@ screen_factory::screen_factory() {
 
 screen_factory::~screen_factory() {}
 
-std::unique_ptr<screen> screen_factory::get(std::string key) {
+std::unique_ptr<screen> screen_factory::get(const std::string& key) {
   return m_screen_creators[key]->create();
 }
 
