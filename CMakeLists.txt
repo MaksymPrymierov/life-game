@@ -12,7 +12,7 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_configure(
-        REQUIRES fmt/8.1.1 ncurses/6.3 boost/1.78.0 sdl/2.0.20
+        REQUIRES fmt/8.1.1 ncurses/6.3 boost/1.78.0 sdl/2.0.20 libxml2/2.9.13
         GENERATORS cmake_find_package)
 
 conan_cmake_autodetect(settings)
