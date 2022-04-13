@@ -1,37 +1,21 @@
 cmake_minimum_required(VERSION 3.10)
 
+set(CMAKE_CXX_COMPILER "g++-10")
+set(CMAKE_C_COMPILER "gcc-10")
+set(CMAKE_BUILD_TYPE Release)
+set(Boost_NOE_WARN_NEW_VERSIONS 1)
+set(CMAKE_TOOLCHAIN_FILE build/cmake-build-release/conan_toolchain.cmake)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O2")
+
 project(GameLife VERSION 0.6)
 
-if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-        message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-        file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/0.18.1/conan.cmake"
-                "${CMAKE_BINARY_DIR}/conan.cmake"
-                TLS_VERIFY ON)
-endif()
-
-include(${CMAKE_BINARY_DIR}/conan.cmake)
-
-conan_cmake_configure(
-        REQUIRES fmt/8.1.1 ncurses/6.3 boost/1.78.0 sdl/2.0.20 libxml2/2.9.13
-        GENERATORS cmake_find_package)
-
-conan_cmake_autodetect(settings)
-
-conan_cmake_install(
-        PATH_OR_REFERENCE .
-        BUILD missing
-        REMOTE conancenter
-        SETTINGS ${settings})
-
-find_package(Curses REQUIRED)
+find_package(ncurses REQUIRED)
 find_package(fmt REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(Boost COMPONENTS program_options REQUIRED)
 configure_file(include/config.h.in config.h)
-
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O2")
 
 set(GameLife_src
         src/screen_cli.cpp
@@ -50,28 +34,28 @@ add_executable(GameLife
 add_library(GameLife_lib STATIC ${GameLife_src})
 
 target_include_directories(GameLife PUBLIC
-        ${SDL2_INCLUDE_DIRS}
         ./include
         ./build
         )
 
 target_include_directories(GameLife_lib PUBLIC
-        ${SDL2_INCLUDE_DIRS}
         ./include
         )
 
 target_link_libraries(GameLife_lib PUBLIC
-        ${CURSES_LIBRARIES}
-        ${SDL2_LIBRARIES}
-        ${Boost_LIBRARIES}
+        ncurses::ncurses
+        sdl::sdl
         fmt::fmt
+        Boost::boost
+        Boost::program_options
         )
 
 target_link_libraries(GameLife PUBLIC
-        ${CURSES_LIBRARIES}
-        ${SDL2_LIBRARIES}
-        ${Boost_LIBRARIES}
+        ncurses::ncurses
+        sdl::sdl
         fmt::fmt
+        Boost::boost
+        Boost::program_options
         )
 
 enable_testing()
