@@ -1,6 +1,8 @@
 #include <form.h>
 #include <screen_ncurses.h>
 
+#include <spdlog/spdlog.h>
+
 #include <cstring>
 
 namespace game_life {
@@ -34,6 +36,7 @@ void screen_ncurses::start() {
 
 int screen_ncurses::show() {
   if (!is_valid()) {
+    spdlog::error("NCurses screen is invalid.");
     return -1;
   }
 

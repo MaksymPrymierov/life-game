@@ -1,8 +1,7 @@
-#include <fmt/color.h>
-#include <fmt/core.h>
-#include <fmt/format.h>
 #include <game.h>
 #include <unistd.h>
+
+#include <spdlog/spdlog.h>
 
 #include <chrono>
 #include <thread>
@@ -17,7 +16,7 @@ game::~game() {}
 
 int game::start() {
   if (!is_valid()) {
-    fmt::print(fg(fmt::color::red), "Error: Game loaded incorrectly!\n");
+    spdlog::error("Error: Game loaded incorrectly!");
     return -1;
   }
 
@@ -27,13 +26,14 @@ int game::start() {
     process_actions();
 
     if (m_screen->show()) {
-      fmt::print(fg(fmt::color::red),
-                 "Error: Game screen loaded incorrectly!\n");
+      spdlog::error("Game screen loaded incorrectly.");
       return -1;
     }
 
     m_screen->print_life_status(m_life_size, m_dead_size);
   }
+
+  spdlog::info("Game successfully started.");
 
   return 0;
 }
@@ -100,6 +100,7 @@ void game::process_actions() {
 
 bool game::is_valid() {
   if (m_screen.get() == nullptr) {
+    spdlog::error("Game screen is invalid.");
     return false;
   }
 
