@@ -5,6 +5,8 @@
 #include <game.h>
 #include <screen/factory.h>
 
+#include <spdlog/spdlog.h>
+
 #include <boost/program_options.hpp>
 #include <iostream>
 
@@ -48,7 +50,11 @@ int main(int argc, char *argv[]) {
   screen = std::move(scr_factory.get(screen_type));
   screen->start();
   game = std::make_unique<game_life::game>(screen);
-  game->start();
+
+  if (game->start()) {
+    spdlog::error("Game of Life has been failed.");
+    return -1;
+  }
 
   return 0;
 }

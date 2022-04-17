@@ -1,6 +1,8 @@
 #include <form.h>
 #include <screen_ncurses.h>
 
+#include <spdlog/spdlog.h>
+
 #include <cstring>
 
 namespace game_life {
@@ -9,22 +11,47 @@ screen_ncurses::screen_ncurses(int w, int h, int life_prob)
     : screen(w, h, life_prob) {}
 
 screen_ncurses::~screen_ncurses() {
-  delwin(m_game_win_ptr);
-  endwin();
+  if (delwin(m_game_win_ptr) != 0) {
+    spdlog::warn("Delete ncurses windows has been failed.");
+  }
+
+  if (endwin() != 0) {
+    spdlog::warn("End ncurses windows has been failed.");
+  }
+
+  spdlog::info("Ncurses screen has been destroyed.");
 }
 
 void screen_ncurses::start() {
-  initscr();
-  cbreak();
-  keypad(stdscr, TRUE);
-  noecho();
+  if (!initscr()) {
+    spdlog::warn("Init ncurses screen has been failed.");
+  }
 
-  start_color();
-  init_pair(1, COLOR_RED, COLOR_BLACK);
-  init_pair(2, COLOR_WHITE, COLOR_BLACK);
+  if (cbreak() != 0) {
+    spdlog::warn("Terminal ncurses settings has been failed.");
+  }
+
+  if (keypad(stdscr, TRUE) != 0) {
+    spdlog::warn("Keyboard ncurses settings has been failed.");
+  }
+
+  if (noecho() != 0) {
+    spdlog::warn("Disable ncurses terminal echo has been failed.");
+  }
+
+  if (start_color() != 0) {
+    spdlog::warn("Init ncurses colors has been failed.");
+  }
+
+  if (init_pair(1, COLOR_RED, COLOR_BLACK) != 0 && init_pair(2, COLOR_WHITE, COLOR_BLACK) != 0) {
+    spdlog::warn("Ncurses color settings has been failed.");
+  }
 
   setup_options();
-  refresh();
+
+  if (refresh() != 0) {
+    spdlog::warn("Refresh ncurses terminal has been failed.");
+  }
 
   alloc_screen_map();
   random_map_set();
@@ -34,6 +61,7 @@ void screen_ncurses::start() {
 
 int screen_ncurses::show() {
   if (!is_valid()) {
+    spdlog::error("NCurses screen is invalid.");
     return -1;
   }
 

@@ -2,6 +2,8 @@
 #include <fmt/core.h>
 #include <screen_sdl.h>
 
+#include <spdlog/spdlog.h>
+
 #include <iostream>
 
 namespace game_life {
@@ -14,19 +16,21 @@ screen_sdl::~screen_sdl() {
 }
 
 void screen_sdl::start() {
-  if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-    return;
+  if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+    spdlog::warn("SDL Screen initialized with errors, error: {}", SDL_GetError());
   }
 
   m_window_ptr = SDL_CreateWindow("Life Game", SDL_WINDOWPOS_UNDEFINED,
                                   SDL_WINDOWPOS_UNDEFINED, m_screen_width,
                                   m_screen_height, SDL_WINDOW_SHOWN);
-
   if (!m_window_ptr) {
-    fmt::print(fg(fmt::color::red), "Error: SDL Window can't create!");
+    spdlog::warn("SDL window creation failed.");
   }
 
   m_background_surface_ptr = SDL_GetWindowSurface(m_window_ptr);
+  if (!m_background_surface_ptr) {
+    spdlog::warn("Failed to get SDL window surface.");
+  }
 
   m_width = m_game_screen_width;
   m_height = m_game_screen_height;

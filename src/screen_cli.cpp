@@ -2,6 +2,8 @@
 #include <fmt/core.h>
 #include <screen_cli.h>
 
+#include <spdlog/spdlog.h>
+
 #include <iostream>
 
 namespace game_life {
@@ -12,6 +14,7 @@ screen_cli::~screen_cli() {}
 
 int screen_cli::show() {
   if (!is_valid()) {
+    spdlog::error("CLI Screen is invalid.");
     return -1;
   }
 

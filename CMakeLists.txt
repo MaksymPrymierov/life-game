@@ -15,6 +15,7 @@ find_package(ncurses REQUIRED)
 find_package(fmt REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(Boost COMPONENTS program_options REQUIRED)
+find_package(spdlog REQUIRED)
 configure_file(include/config.h.in config.h)
 
 set(GameLife_src
@@ -48,6 +49,7 @@ target_link_libraries(GameLife_lib PUBLIC
         fmt::fmt
         Boost::boost
         Boost::program_options
+        spdlog::spdlog
         )
 
 target_link_libraries(GameLife PUBLIC
@@ -56,6 +58,7 @@ target_link_libraries(GameLife PUBLIC
         fmt::fmt
         Boost::boost
         Boost::program_options
+        spdlog::spdlog
         )
 
 enable_testing()
