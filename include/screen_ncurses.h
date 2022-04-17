@@ -16,11 +16,8 @@ class screen_ncurses : public screen {
   void print_life_status(size_t life_status, size_t dead_status) override;
 
  private:
-  static constexpr inline char m_life = 'X';
-  static constexpr inline char m_dead = ' ';
-  static constexpr inline char m_vboard = '|';
-  static constexpr inline char m_hboard = '-';
-  static constexpr inline char m_corner = '+';
+  static constexpr inline std::string_view m_life = "▣";
+  static constexpr inline std::string_view m_dead = "░";
 
   WINDOW *m_game_win_ptr;
 

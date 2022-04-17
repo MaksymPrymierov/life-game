@@ -23,6 +23,8 @@ screen_ncurses::~screen_ncurses() {
 }
 
 void screen_ncurses::start() {
+  setlocale(LC_ALL, "");
+
   if (!initscr()) {
     spdlog::warn("Init ncurses screen has been failed.");
   }
@@ -68,9 +70,9 @@ int screen_ncurses::show() {
   for (int i = 1; i < m_height + 1; ++i) {
     for (int j = 1; j < m_width + 1; ++j) {
       if (m_screen_map.at(i - 1).at(j - 1)) {
-        mvwaddch(m_game_win_ptr, i, j, m_life);
+        mvwadd_wch(m_game_win_ptr, i, j, reinterpret_cast<const cchar_t*>(m_life.data()));
       } else {
-        mvwaddch(m_game_win_ptr, i, j, m_dead);
+        mvwadd_wch(m_game_win_ptr, i, j, reinterpret_cast<const cchar_t*>(m_dead.data()));
       }
     }
   }
@@ -81,21 +83,17 @@ int screen_ncurses::show() {
 }
 
 void screen_ncurses::print_life_status(size_t life_status, size_t dead_status) {
-  wattron(m_game_win_ptr, COLOR_PAIR(2));
-  wprintw(m_game_win_ptr, " Life status: [%lu], Dead status [%lu]", life_status,
+  wprintw(m_game_win_ptr, "   Life status: [%lu], Dead status [%lu]", life_status,
           dead_status);
-  wattron(m_game_win_ptr, COLOR_PAIR(1));
 }
 
 void screen_ncurses::create_window() {
-  m_game_win_ptr = newwin(m_height + 2, m_width + 2, (LINES - m_height + 2) / 2,
-                          (COLS - m_width + 2) / 2);
+  m_game_win_ptr = newwin(m_height + 2, m_width + 4, (LINES - m_height) / 2,
+                          (COLS - m_width) / 2);
   wattron(m_game_win_ptr, COLOR_PAIR(1));
 
   box(m_game_win_ptr, 0, 0);
   wrefresh(m_game_win_ptr);
-  wborder(m_game_win_ptr, m_vboard, m_vboard, m_hboard, m_hboard, m_corner,
-          m_corner, m_corner, m_corner);
 }
 
 void screen_ncurses::setup_options() {
