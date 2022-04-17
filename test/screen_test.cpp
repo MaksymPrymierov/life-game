@@ -41,9 +41,9 @@ BOOST_AUTO_TEST_CASE(ScreenConstructor) {
   }
 
   for (int i = 0; i < 4; ++i) {
-    game_life::screen_cli c(incorrect_lifep[i], incorrect_lifep[i], 10);
-    game_life::screen_ncurses n(incorrect_lifep[i], incorrect_lifep[i], 10);
-    game_life::screen_sdl s(incorrect_lifep[i], incorrect_lifep[i], 10);
+    game_life::screen_cli c(10, 10, incorrect_lifep[i]);
+    game_life::screen_ncurses n(10, 10, incorrect_lifep[i]);
+    game_life::screen_sdl s(10, 10, incorrect_lifep[i]);
 
     BOOST_ASSERT(!c.is_valid());
     BOOST_ASSERT(!n.is_valid());
@@ -51,13 +51,13 @@ BOOST_AUTO_TEST_CASE(ScreenConstructor) {
   }
 
   for (int i = 0; i < 3; ++i) {
-    game_life::screen_cli c(correct_lifep[i], correct_lifep[i], 10);
-    game_life::screen_ncurses n(correct_lifep[i], correct_lifep[i], 10);
-    game_life::screen_sdl s(correct_lifep[i], correct_lifep[i], 10);
+    game_life::screen_cli c(10, 10, correct_lifep[i]);
+    game_life::screen_ncurses n(10, 10, correct_lifep[i]);
+    game_life::screen_sdl s(10, 10, correct_lifep[i]);
 
-    BOOST_ASSERT(!c.is_valid());
-    BOOST_ASSERT(!n.is_valid());
-    BOOST_ASSERT(!s.is_valid());
+    BOOST_ASSERT(c.is_valid());
+    BOOST_ASSERT(n.is_valid());
+    BOOST_ASSERT(s.is_valid());
   }
 }
 
