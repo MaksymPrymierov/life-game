@@ -7,3 +7,4 @@ GameLife
 build/
 CTestTestfile.cmake
 libGameLife_lib.a
+.vscode
